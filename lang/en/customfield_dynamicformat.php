@@ -17,7 +17,7 @@
 /**
  * Customfield text field plugin strings
  *
- * @package   customfield_dynamic
+ * @package   customfield_dynamicformat
  * @copyright 2020 Sooraj Singh
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,8 +28,8 @@ $string['errordefaultvaluenotinlist'] = 'The default value must be one of the op
 $string['errornotenoughoptions'] = 'Please provide at least two options, with each on a new line.';
 $string['invalidoption'] = 'Invalid option selected';
 $string['menuoptions'] = 'Menu options (one per line)';
-$string['pluginname'] = 'Dynamic Dropdown menu';
-$string['privacy:metadata'] = 'The Dynamic Dropdown menu field type plugin doesn\'t store any personal data; it uses tables defined in core.';
+$string['pluginname'] = 'Dynamic formatted Dropdown menu';
+$string['privacy:metadata'] = 'The Dynamic formatted Dropdown menu field type plugin doesn\'t store any personal data; it uses tables defined in core.';
 $string['specificsettings'] = 'Dynamic Dropdown menu field settings';
 $string['enablemultiselect'] = 'Enable Multi Select';
 $string['autocomplete'] = 'Enable auto-complete mode';

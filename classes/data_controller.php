@@ -17,12 +17,12 @@
 /**
  * dynamic plugin data controller
  *
- * @package   customfield_dynamic
+ * @package   customfield_dynamicformat
  * @copyright 2020 Sooraj Singh
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace customfield_dynamic;
+namespace customfield_dynamicformat;
 
 use core_customfield\api;
 
@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die;
 /**
  * Class data
  *
- * @package customfield_dynamic
+ * @package customfield_dynamicformat
  * @copyright 2020 Sooraj Singh
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -52,6 +52,9 @@ class data_controller extends \core_customfield\data_controller {
      */
     public function get_default_value() {
         $defaultvalue = $this->get_field()->get_configdata_property('defaultvalue');
+        $defaultvalue = format_text($defaultvalue);
+        $defaultvalue = strip_tags($defaultvalue);
+
         $defaultvalues = '';
         if ('' . $defaultvalue !== '') {
             $options = field_controller::get_options_array($this->get_field());
@@ -121,7 +124,7 @@ class data_controller extends \core_customfield\data_controller {
         if (!property_exists($datanew, $elementname)) {
             return;
         }
-        $value = $datanew->$elementname;
+        $value = $datanew->{$elementname};
         if ($this->get_field()->get_configdata_property('multiselect')) {
             $value = implode(',', $datanew->$elementname);
         }

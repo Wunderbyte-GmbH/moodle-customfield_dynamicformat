@@ -1,8 +1,8 @@
-# moodle-customfield_dynamic
- This is a course customfield plugin
+# moodle-customfield_dynamicformat
+ This is a course customfield plugin. It's a fork from customfield_dynamic, where the default value is formatted so it can come from a filter, eg {categoryid}.
 ## Installation
  Intall this plugin directly from UI.
-  Site Administration  => Plugin => install plugin  
+  Site Administration  => Plugin => install plugin
 
 ## Use
     1) Add Dynamic Dropdown Menu field in Course customField

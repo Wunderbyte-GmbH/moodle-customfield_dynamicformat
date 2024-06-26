@@ -17,15 +17,15 @@
 /**
  * Customfield dynamic Type
  *
- * @package   customfield_dynamic
+ * @package   customfield_dynamicformat
  * @copyright 2020 Sooraj Singh
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'customfield_dynamic';
-$plugin->version   = 2021020712;
+$plugin->component = 'customfield_dynamicformat';
+$plugin->version   = 2024062600;
 $plugin->requires  = 2019051100;
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = 'Version for Moodle 3.7 onwards';

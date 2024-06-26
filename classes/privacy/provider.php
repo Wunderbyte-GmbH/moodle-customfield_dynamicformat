@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Privacy Subsystem implementation for customfield_dynamic.
+ * Privacy Subsystem implementation for customfield_dynamicformat.
  *
- * @package    customfield_dynamic
+ * @package    customfield_dynamicformat
  * @copyright  2020 Sooraj Singh
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace customfield_dynamic\privacy;
+namespace customfield_dynamicformat\privacy;
 
 use core_customfield\data_controller;
 use core_customfield\privacy\customfield_provider;
@@ -29,7 +29,7 @@ use core_privacy\local\request\writer;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Privacy Subsystem for customfield_dynamic implementing null_provider.
+ * Privacy Subsystem for customfield_dynamicformat implementing null_provider.
  *
  * @copyright  2020 Sooraj Singh
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
