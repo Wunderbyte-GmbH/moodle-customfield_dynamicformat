@@ -24,8 +24,6 @@
 
 namespace customfield_dynamicformat;
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * Class field
  *
@@ -48,12 +46,22 @@ class field_controller extends \core_customfield\field_controller {
         $mform->addElement('header', 'header_specificsettings', get_string('specificsettings', 'customfield_dynamicformat'));
         $mform->setExpanded('header_specificsettings', true);
 
-        $mform->addElement('textarea', 'configdata[dynamicsql]', get_string('sqlquery', 'customfield_dynamicformat'),
-         array('rows' => 7, 'cols' => 52));
+        $mform->addElement(
+            'textarea',
+            'configdata[dynamicsql]',
+            get_string('sqlquery', 'customfield_dynamicformat'),
+            ['rows' => 7, 'cols' => 52]
+        );
         $mform->setType('configdata[dynamicsql]', PARAM_RAW);
 
-        $mform->addElement('advcheckbox', 'configdata[autocomplete]', get_string('autocomplete', 'customfield_dynamicformat'),
-         '', array('group' => 1), array(0, 1));
+        $mform->addElement(
+            'advcheckbox',
+            'configdata[autocomplete]',
+            get_string('autocomplete', 'customfield_dynamicformat'),
+            '',
+            ['group' => 1],
+            [0, 1]
+        );
         $mform->addHelpButton('configdata[autocomplete]', 'autocomplete', 'customfield_dynamicformat');
 
         $mform->addElement('text', 'configdata[defaultvalue]', get_string('defaultvalue', 'core_customfield'), 'size="50"');
@@ -61,8 +69,14 @@ class field_controller extends \core_customfield\field_controller {
 
         $mform->addHelpButton('configdata[defaultvalue]', 'defaultvalue', 'customfield_dynamicformat');
 
-        $mform->addElement('advcheckbox', 'configdata[multiselect]', get_string('enablemultiselect', 'customfield_dynamicformat'),
-         '', array('group' => 1), array(0, 1));
+        $mform->addElement(
+            'advcheckbox',
+            'configdata[multiselect]',
+            get_string('enablemultiselect', 'customfield_dynamicformat'),
+            '',
+            ['group' => 1],
+            [0, 1]
+        );
     }
 
     /**
@@ -71,7 +85,7 @@ class field_controller extends \core_customfield\field_controller {
      * @param \core_customfield\field_controller $field
      * @return array
      */
-    public static function get_options_array(\core_customfield\field_controller $field) : array {
+    public static function get_options_array(\core_customfield\field_controller $field): array {
         global $DB;
         if ($field->get_configdata_property('dynamicsql')) {
             $resultset = $DB->get_records_sql($field->get_configdata_property('dynamicsql'));
@@ -114,10 +128,16 @@ class field_controller extends \core_customfield\field_controller {
                         } else {
                             $firstval = reset($resultset);
                             if (!object_property_exists($firstval, 'id')) {
-                                $err['configdata[dynamicsql]'] = get_string('queryerroridmissing', 'customfield_dynamicformat');
+                                $err['configdata[dynamicsql]'] = get_string(
+                                    'queryerroridmissing',
+                                    'customfield_dynamicformat'
+                                );
                             } else {
                                 if (!object_property_exists($firstval, 'data')) {
-                                    $err['configdata[dynamicsql]'] = get_string('queryerrordatamissing', 'customfield_dynamicformat');
+                                    $err['configdata[dynamicsql]'] = get_string(
+                                        'queryerrordatamissing',
+                                        'customfield_dynamicformat'
+                                    );
                                 } else if (!empty($data['configdata']['defaultvalue'])) {
                                     // Def missing.
                                     $defaultvalue = $data['configdata']['defaultvalue'];
@@ -130,25 +150,25 @@ class field_controller extends \core_customfield\field_controller {
                                             'customfield_dynamicformat',
                                             count($values)
                                         );
-                                    } else if ($data['configdata']['multiselect'] == 0 && !array_key_exists($defaultvalue, $options)) {
+                                    } else if (
+                                        $data['configdata']['multiselect'] == 0
+                                        && !array_key_exists($defaultvalue, $options)
+                                    ) {
                                         $err['configdata[defaultvalue]'] = get_string(
                                             'queryerrordefaultmissing',
                                             'customfield_dynamicformat',
                                             $defaultvalue
                                         );
-                                    } else {
-                                        // In this version of this plugin, we don't validate the default value, as ist can come from a filter.
                                     }
-
+                                    // Otherwise the default value is not validated, as it can come from a filter.
                                 }
                             }
                         }
                     }
                 }
             }
-
         } catch (\Exception $e) {
-            $err['configdata[dynamicsql]'] = get_string('sqlerror', 'customfield_dynamicformat') . ': ' .$e->getMessage();
+            $err['configdata[dynamicsql]'] = get_string('sqlerror', 'customfield_dynamicformat') . ': ' . $e->getMessage();
         }
         return $err;
     }

@@ -26,8 +26,6 @@ namespace customfield_dynamicformat;
 
 use core_customfield\api;
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * Class data
  *
@@ -36,12 +34,11 @@ defined('MOODLE_INTERNAL') || die;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class data_controller extends \core_customfield\data_controller {
-
     /**
      * Return the name of the field where the information is stored
      * @return string
      */
-    public function datafield() : string {
+    public function datafield(): string {
         return 'value';
     }
 
@@ -101,10 +98,10 @@ class data_controller extends \core_customfield\data_controller {
         $field = $this->get_field();
         $config = $field->get('configdata');
         $options = field_controller::get_options_array($field);
-        $formattedoptions = array();
-        $attributes = array();
+        $formattedoptions = [];
+        $attributes = [];
         if ($this->get_field()->get_configdata_property('multiselect')) {
-            $attributes = array('multiple' => true);
+            $attributes = ['multiple' => true];
         }
         $context = $this->get_field()->get_handler()->get_configuration_context();
         foreach ($options as $key => $option) {
@@ -117,8 +114,13 @@ class data_controller extends \core_customfield\data_controller {
             $elementtype = 'autocomplete';
         }
         $elementname = $this->get_form_element_name();
-        $mform->addElement($elementtype, $elementname, $this->get_field()->get_formatted_name(),
-        $formattedoptions, $attributes);
+        $mform->addElement(
+            $elementtype,
+            $elementname,
+            $this->get_field()->get_formatted_name(),
+            $formattedoptions,
+            $attributes
+        );
 
         if ($field->get_configdata_property('required')) {
             $mform->addRule($elementname, null, 'required', null, 'client');
@@ -162,7 +164,7 @@ class data_controller extends \core_customfield\data_controller {
      * @param array $files
      * @return array
      */
-    public function instance_form_validation(array $data, array $files) : array {
+    public function instance_form_validation(array $data, array $files): array {
         $errors = parent::instance_form_validation($data, $files);
         if ($this->get_field()->get_configdata_property('required')) {
             // Standard required rule does not work on dynamic element.
@@ -212,8 +214,11 @@ class data_controller extends \core_customfield\data_controller {
         foreach ($value as $val) {
             if (array_key_exists($val, $options)) {
                 $completevalue .= (empty($completevalue) ? '' : ', ') .
-                 format_string($options[$val], true,
-                 ['context' => $this->get_field()->get_handler()->get_configuration_context()]);
+                 format_string(
+                     $options[$val],
+                     true,
+                     ['context' => $this->get_field()->get_handler()->get_configuration_context()]
+                 );
             }
         }
 
